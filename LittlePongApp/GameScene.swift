@@ -12,16 +12,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //categories for BitMasks
     let gameBallCategory: UInt32 = 1
     let racketCategory : UInt32 = 2
-    
     var score = 0
     var level = 1
+    let ball = GameBall(radius: 15,velo: CGVector(dx:200, dy:-200), color: UIColor.red, name: "Ball")
+   
     let gameBall = SKSpriteNode(color: UIColor.blue, size: CGSize(width: 30, height: 30))
     let racket = SKSpriteNode (color: UIColor.red, size: CGSize(width: 100, height: 20))
     let scoreLabel = SKLabelNode ()
     let levelLabel = SKLabelNode()
     
     
+
+    
     override func didMove (to view: SKView) {
+        ball.position = CGPoint(x: frame.midX + 50 , y: frame.midY)
+        addChild(ball)
         //our scene takes care of the contact between nodes
         physicsWorld.contactDelegate = self
         
