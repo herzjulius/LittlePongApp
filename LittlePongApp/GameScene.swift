@@ -14,6 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let racketCategory : UInt32 = 2
     var score = 0
     var level = 1
+    //create a new GameBall Object
     let ball = GameBall(radius: 15,velo: CGVector(dx:200, dy:-200), color: UIColor.red, name: "Ball")
    
     let gameBall = SKSpriteNode(color: UIColor.blue, size: CGSize(width: 30, height: 30))
