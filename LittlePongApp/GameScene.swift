@@ -37,13 +37,14 @@ class GameScene: SKScene {
         //the edgdes of the view are walls
         
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
-        // set the racket as a physics body
+        //set the racket as a physics body
         
         racket.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: racket.size.width, height: racket.size.height))
         racket.physicsBody!.isDynamic = false
         
         
         //no damping and friction
+        //no rotation
         gameBall.physicsBody!.allowsRotation = false
         gameBall.physicsBody?.linearDamping = 0
         gameBall.physicsBody?.friction = 0
@@ -51,17 +52,26 @@ class GameScene: SKScene {
         
         
         //inital velocity of the game ball
-        gameBall.physicsBody?.velocity = CGVector(dx:100.0, dy:-100.0)
+        gameBall.physicsBody?.velocity = CGVector(dx:200, dy:-200)
         
 
 
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    
         for touch in touches {
+            
             let loc = touch.location(in: self)
-            racket.position.x = loc.x
-            racket.position.y = loc.y
+            //the racket cant move outside the frame
+            if (loc.y < frame.maxY/8 && loc.y > frame.minY){
+                racket.position.x = loc.x
+                racket.position.y = loc.y
+            }else{
+                racket.position.x = loc.x
+            }
+  
         }
         
     }
